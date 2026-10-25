@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#18283a">
+<title>Ephesians Quest｜以弗所書探索之旅 V7 手機優化版</title>
+<style>
+:root{--navy:#14263a;--night:#091525;--cream:#f7efd9;--gold:#e4bb67;--muted:#b4bfd0;--line:#ffffff29;--ink:#102031;--teal:#7bd1bd}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 50% -20%,#34516c,#101e30 58%,#091522);font-family:system-ui,-apple-system,'Noto Sans TC','PingFang TC',sans-serif;color:var(--cream);min-height:100vh}
+button,input{font:inherit}button{cursor:pointer}
+button:focus-visible,[role=button]:focus-visible,input:focus-visible{outline:3px solid #ffe3a1;outline-offset:4px}
+.wrap{max-width:1120px;margin:auto;padding:20px 18px 45px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.brand small{color:var(--gold);font-weight:800;letter-spacing:.23em}.brand h1{font-family:Georgia,serif;font-size:clamp(27px,4vw,43px);margin:2px 0}.topActions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid #d9b76b80;background:#f0c979;color:#172539;border-radius:10px;padding:11px 18px;font-weight:800;box-shadow:0 5px 0 #ad8544}.btn.secondary{background:#203a50;color:#e7eaf2;box-shadow:none;border-color:#ffffff50}.btn:disabled{opacity:.45;cursor:not-allowed}.sub{color:#c0ccdc;line-height:1.75;margin:12px 0 22px}
+.chapters{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.chapter{padding:12px 7px;border:1px solid #ffffff29;background:#162c41;border-radius:12px;text-align:center;color:#e5e7e9;min-height:73px}.chapter b{display:block;font-size:13px;margin-top:4px}.chapter small{font-size:11px;color:#b9c4d0}.chapter.active{background:#425333;border-color:#e6ca7a;box-shadow:inset 0 0 0 1px #ebd08a}.chapter.locked{opacity:.45}
+.sceneCard{border:1px solid #e5cd9166;border-radius:20px;background:#152739;overflow:hidden;box-shadow:0 22px 75px #02091285}
+.scene{position:relative;min-height:490px;overflow:hidden;isolation:isolate}.bgLayer,.bgLayer *{position:absolute;pointer-events:none}.bgLayer{inset:0;overflow:hidden}.scene:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 8%,#fff1b21f,transparent 36%),linear-gradient(180deg,transparent 60%,#00000036 100%);pointer-events:none}
+.scene.ch1{background:linear-gradient(180deg,#172840 0%,#395779 40%,#7e8b9c 72%,#47423f 100%)}
+.scene.ch2{background:linear-gradient(180deg,#394960 0%,#7c8f8a 45%,#7d775f 70%,#3b3229 100%)}
+.scene.ch3{background:linear-gradient(180deg,#181630 0%,#35355f 45%,#4b5064 70%,#202637 100%)}
+.narrative{position:absolute;top:18px;left:18px;right:18px;z-index:8;background:#12263de6;border:1px solid #ffffff24;border-radius:14px;padding:13px 15px 12px;box-shadow:0 8px 30px #0005}.narrative b{color:#f1d48d}.narrative .small{display:block;color:#d6e0e9;font-size:13px;line-height:1.7;margin-top:4px}
+.spark{position:absolute;width:36px;height:36px;border:0;background:transparent;padding:0;z-index:8;filter:drop-shadow(0 0 12px #ffefbe)}.spark:before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#fff6ca 0%,#f2d37e 38%,#f2d37e22 63%,transparent 72%);animation:pulse 1.9s ease-in-out infinite}.spark:after{content:"✦";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff9da;text-shadow:0 0 12px #ffe6a5,0 0 20px #fff1b5;animation:twinkle 1.6s ease-in-out infinite alternate}.spark:hover{transform:scale(1.15)}.spark.collected{display:none}
+@keyframes pulse{0%,100%{transform:scale(.9);opacity:.72}50%{transform:scale(1.12);opacity:1}}@keyframes twinkle{from{transform:scale(.9) rotate(-6deg)}to{transform:scale(1.08) rotate(6deg)}}
+.completionNotice{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:9;background:#133048e8;border:1px solid #ebcd838a;border-radius:999px;padding:8px 16px;font-size:13px;color:#ffefc7;opacity:0;pointer-events:none;transition:opacity .4s ease}.scene.animating .completionNotice{opacity:1}
+.sceneFoot{background:#111f2e;padding:16px 18px;display:flex;gap:13px;justify-content:space-between;align-items:center;flex-wrap:wrap}.bar{flex:1;background:#2e4050;border-radius:15px;height:10px;overflow:hidden;min-width:120px}.bar div{height:100%;background:linear-gradient(90deg,#80c9b4,#edcf7d);transition:width .2s}.sceneFoot strong{font-size:14px}
+.bottom{display:grid;grid-template-columns:1fr 310px;gap:17px;margin-top:18px}.panel{background:#192d40;border:1px solid #ffffff28;border-radius:15px;padding:18px}.panel h2{font-size:18px;margin:0 0 10px}.panel p{color:#cbd5df;line-height:1.7;margin:8px 0}.invgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.slot{border:1px solid #ffffff30;background:#0b1a2b;border-radius:11px;min-height:94px;padding:8px 4px;color:#f4ebcf;text-align:center}.slot span{display:block;font-size:31px}.slot small{font-size:11px}.slot.empty{opacity:.4}.scripture{color:#ead299!important}.chapterLead{font-size:13px;color:#d7e2e8}
+.modalWrap,.overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.modalWrap{background:#030916cf}.modalWrap.show,.overlay.show{display:flex}.modal{background:linear-gradient(#203a50,#14283a);border:1px solid #e4c98994;border-radius:18px;padding:23px;max-width:540px;width:100%;box-shadow:0 22px 65px #000c;max-height:90vh;overflow:auto}.modal h2{font-size:24px;margin:4px 0 13px}.modal p{line-height:1.75;color:#d4dfe6}.choice{display:block;width:100%;margin:9px 0;background:#102439;color:#f2e9d5;border:1px solid #5b7282;border-radius:10px;text-align:left;padding:12px}.choice:hover{background:#315068}.choice.correct{border-color:#8bdbaf;background:#214c40}.feedback{background:#102438;border-left:3px solid var(--gold);padding:12px;margin-top:12px;line-height:1.6}.modalBtns{display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap;margin-top:18px}.tag{display:inline-block;border-radius:20px;padding:4px 9px;background:#35536a;color:#f5dea1;font-size:12px}
+.overlay{background:linear-gradient(180deg,#090f18e8,#0b1622f4)}.startCard{max-width:620px;width:100%;background:linear-gradient(180deg,#1d3348,#122031);border:1px solid #e1c27a80;border-radius:22px;padding:28px;box-shadow:0 24px 60px #000a}.startCard h1{font-family:Georgia,serif;font-size:clamp(30px,4.5vw,48px);margin:6px 0 12px}.startCard p{color:#d5dfe8;line-height:1.8}.nameRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.nameRow input{flex:1;min-width:220px;padding:13px 14px;border-radius:12px;border:1px solid #ffffff3d;background:#0e1a28;color:#fff}.helpLine{font-size:13px;color:#f2d894;margin-top:10px}
+.floatLoot{position:fixed;z-index:50;font-size:34px;pointer-events:none;filter:drop-shadow(0 0 12px #ffe29d);transition:transform .82s cubic-bezier(.2,.7,.2,1), left .82s cubic-bezier(.2,.7,.2,1), top .82s cubic-bezier(.2,.7,.2,1), opacity .82s}.playerTag{color:#f6df9e}.foot{text-align:center;color:#aebed0;font-size:12px;line-height:1.7;margin-top:22px}
+
+/* Chapter 1 scene details */
+.ch1 .sunhalo{left:50%;top:8%;transform:translateX(-50%);width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#fff6c6 0%,#f8de8e 22%,#f1c45b77 40%,transparent 70%)}
+.ch1 .cloud{background:linear-gradient(180deg,#f4f0e4,#d9d8da);border-radius:999px;opacity:.9}.ch1 .cloud:before,.ch1 .cloud:after{content:"";position:absolute;background:inherit;border-radius:50%}
+.ch1 .c1{left:10%;top:16%;width:100px;height:36px}.ch1 .c1:before{left:16px;top:-17px;width:34px;height:34px}.ch1 .c1:after{left:42px;top:-13px;width:44px;height:44px}
+.ch1 .c2{right:12%;top:20%;width:120px;height:40px}.ch1 .c2:before{left:12px;top:-18px;width:36px;height:36px}.ch1 .c2:after{left:50px;top:-20px;width:50px;height:50px}
+.ch1 .mount{bottom:26%;width:0;height:0;border-left:150px solid transparent;border-right:150px solid transparent;border-bottom:180px solid #4f6073}.ch1 .m1{left:-2%;border-bottom-color:#47586d}.ch1 .m2{left:20%;border-left-width:180px;border-right-width:180px;border-bottom-width:205px;border-bottom-color:#5a6c7d}.ch1 .m3{right:12%;border-bottom-color:#516275}.ch1 .m4{right:-8%;border-left-width:170px;border-right-width:170px;border-bottom-color:#3f4e61}
+.ch1 .temple{left:50%;bottom:29%;width:240px;height:155px;z-index:1;transform-origin:50% 100%;transition:transform .9s ease,bottom .9s ease,filter .9s ease}.ch1 .temple .roof{left:20px;top:0;width:200px;height:46px;background:linear-gradient(180deg,#e6c176,#bd9050);clip-path:polygon(50% 0,100% 100%,0 100%);box-shadow:0 0 18px #f6d27f55}.ch1 .temple .lintel{left:38px;top:40px;width:164px;height:16px;background:#d3b178;border-radius:3px}.ch1 .temple .base{left:30px;bottom:0;width:180px;height:18px;background:#9f8259;border-radius:4px}.ch1 .temple .col{top:52px;width:24px;height:84px;background:linear-gradient(180deg,#f1ddb2,#caa165);border-radius:7px}.ch1 .temple .col:before,.ch1 .temple .col:after{content:"";position:absolute;left:-2px;width:28px;height:8px;background:#c39a61;border-radius:4px}.ch1 .temple .col:before{top:-6px}.ch1 .temple .col:after{bottom:-6px}.ch1 .temple .cA{left:50px}.ch1 .temple .cB{left:88px}.ch1 .temple .cC{left:126px}.ch1 .temple .cD{left:164px}
+.ch1 .path{left:50%;bottom:-10px;transform:translateX(-50%);width:270px;height:235px;background:linear-gradient(180deg,#d5ba8f,#9c8564);clip-path:polygon(45% 0,55% 0,84% 100%,16% 100%);opacity:.95;transition:width .9s ease,height .9s ease}.ch1 .path:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0 18px,#816c5040 19px 21px);opacity:.5}
+.ch1 .stone{bottom:14%;width:34px;height:24px;background:#a59b95;border-radius:50%;box-shadow:inset -4px -3px 0 #7d756f}.ch1 .st1{left:18%}.ch1 .st2{left:24%;bottom:20%}.ch1 .st3{right:22%;bottom:18%}.ch1 .st4{right:14%;bottom:12%}
+.ch1 .bush{bottom:16%;width:52px;height:34px;background:#5e794f;border-radius:50% 50% 40% 40%;box-shadow:-15px 7px 0 0 #6f8858,15px 9px 0 0 #567148}.ch1 .b1{left:8%}.ch1 .b2{left:31%;bottom:28%}.ch1 .b3{right:30%;bottom:27%}.ch1 .b4{right:9%}.ch1 .lamp{bottom:22%;width:10px;height:56px;background:#4d3b2a;border-radius:4px}.ch1 .lamp:before{content:"";position:absolute;left:-9px;top:-16px;width:28px;height:18px;background:#e7c979;clip-path:polygon(50% 0,100% 35%,82% 100%,18% 100%,0 35%);box-shadow:0 0 18px #f7e39a88}.ch1 .l1{left:36%}.ch1 .l2{right:36%}
+.ch1.ch1-stage-0 .temple{transform:translateX(-50%) scale(.82);bottom:31%;filter:blur(.2px)}.ch1.ch1-stage-0 .path{width:300px;height:250px}
+.ch1.ch1-stage-1 .temple{transform:translateX(-50%) scale(.92);bottom:30%}.ch1.ch1-stage-1 .path{width:284px;height:242px}
+.ch1.ch1-stage-2 .temple{transform:translateX(-50%) scale(1.02);bottom:28%}.ch1.ch1-stage-2 .path{width:270px;height:236px}
+.ch1.ch1-stage-3 .temple{transform:translateX(-50%) scale(1.16);bottom:24%;filter:drop-shadow(0 0 22px #ffe1a255)}.ch1.ch1-stage-3 .path{width:248px;height:215px}
+
+/* Chapter 2 scene details */
+.ch2 .sunset{left:50%;top:13%;transform:translateX(-50%);width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,#ffe2a8 0%,#f5bf73 35%,#f0a55255 56%,transparent 72%)}
+.ch2 .groundPath{left:50%;bottom:0;transform:translateX(-50%);width:100%;height:170px;background:linear-gradient(180deg,#7b6a52,#544537)}
+.ch2 .rubble{bottom:17%;width:26px;height:18px;background:#88715a;border-radius:55%}.ch2 .ru1{left:43%}.ch2 .ru2{left:48%;bottom:15%}.ch2 .ru3{right:46%}.ch2 .ru4{right:42%;bottom:15%}
+.ch2 .group{bottom:24%;width:160px;height:140px;z-index:2}.ch2 .gL{left:7%}.ch2 .gR{right:7%}.ch2 .group:before{content:"";position:absolute;left:12px;right:12px;bottom:0;height:95px;border-radius:18px;background:#cbb79644;box-shadow:0 10px 30px #0002 inset}
+.ch2 .person{bottom:10px;width:34px;height:84px}.ch2 .person .head{left:7px;top:0;width:20px;height:20px;border-radius:50%;background:#f1d2b5}.ch2 .person .body{left:0;top:20px;width:34px;height:49px;border-radius:12px 12px 8px 8px}.ch2 .person .legs{left:8px;bottom:0;width:6px;height:18px;background:#654b37;box-shadow:12px 0 0 #654b37}.ch2 .person .arms{left:-3px;top:26px;width:40px;height:8px;border-radius:7px}
+.ch2 .person .cape{top:22px;left:-4px;width:42px;height:48px;border-radius:16px 16px 8px 8px;opacity:.72}
+.ch2 .robeBlue .body{background:#667fb6}.ch2 .robeBlue .arms,.ch2 .robeBlue .cape{background:#5770a7}.ch2 .robeTan .body{background:#b79873}.ch2 .robeTan .arms,.ch2 .robeTan .cape{background:#a7845f}.ch2 .robeGreen .body{background:#7f9c7a}.ch2 .robeGreen .arms,.ch2 .robeGreen .cape{background:#6a875f}.ch2 .robeRed .body{background:#a16b63}.ch2 .robeRed .arms,.ch2 .robeRed .cape{background:#8e5a52}
+.ch2 .pA{left:10px}.ch2 .pB{left:54px}.ch2 .pC{left:98px}
+.ch2 .pD{left:122px;transform:scale(.94)}
+.ch2 .label{top:-22px;left:50%;transform:translateX(-50%);background:#173149d9;border:1px solid #ffffff2a;border-radius:999px;padding:5px 12px;font-size:12px;color:#ffe8b5;white-space:nowrap}
+.ch2 .labelSub{top:0;left:50%;transform:translateX(-50%);font-size:11px;color:#e8eef5;opacity:.84}
+.ch2 .jewishArch{left:26px;top:20px;width:36px;height:10px;background:#d7c083;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.ch2 .gentileTrim{left:-3px;top:22px;width:40px;height:7px;background:linear-gradient(90deg,#dab06c,#ffffff00,#dab06c)}
+.ch2 .barrier{left:50%;bottom:18%;transform:translateX(-50%);width:250px;height:190px;z-index:3}
+.ch2 .passageGlow{left:50%;bottom:21%;transform:translateX(-50%);width:110px;height:160px;background:radial-gradient(ellipse at center,#fff2be55 0%,#ffecc522 30%,transparent 70%);opacity:0;transition:opacity .8s ease}
+.ch2 .wallL,.ch2 .wallR{bottom:0;width:118px;height:150px;background:linear-gradient(180deg,#b19571 0%,#8f7355 50%,#6f5640 100%);border:3px solid #87684d;box-shadow:inset 0 0 0 2px #6e5640, 0 8px 20px #0003;transition:transform 1s ease, filter .8s ease}
+.ch2 .wallL{left:0;clip-path:polygon(0 13%,8% 6%,21% 12%,32% 6%,44% 11%,58% 4%,71% 11%,84% 6%,100% 12%,100% 100%,0 100%)}
+.ch2 .wallR{right:0;clip-path:polygon(0 12%,16% 7%,29% 11%,42% 5%,56% 11%,68% 6%,79% 12%,92% 7%,100% 13%,100% 100%,0 100%)}
+.ch2 .wallL:before,.ch2 .wallR:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,#0000 0 18px,#ffffff12 19px 20px),repeating-linear-gradient(90deg,#0000 0 24px,#ffffff10 25px 26px),linear-gradient(180deg,#ffffff18,#0000 45%)}
+.ch2 .crack{left:50%;top:18px;transform:translateX(-50%);width:34px;height:132px;background:linear-gradient(180deg,transparent 0,#392c24 18%,#2d221c 100%);clip-path:polygon(48% 0,62% 7%,52% 17%,71% 27%,54% 39%,67% 50%,46% 63%,58% 73%,42% 86%,53% 100%,17% 100%,0 84%,10% 71%,0 57%,13% 41%,4% 26%,17% 11%,30% 0);transition:opacity .5s ease, transform .8s ease}
+.ch2 .dust{left:50%;bottom:12%;transform:translateX(-50%);width:210px;height:90px;background:radial-gradient(ellipse at center,#d7c7aa66 0%,#b39c7b33 33%,transparent 74%);opacity:0;transition:opacity .8s ease}
+.ch2 .shard{bottom:28px;width:22px;height:16px;background:#92765d;clip-path:polygon(10% 12%,80% 0,100% 40%,72% 100%,0 70%);opacity:0;transition:transform .9s ease, opacity .7s ease}.ch2 .s1{left:44%}.ch2 .s2{left:48%}.ch2 .s3{right:48%}.ch2 .s4{right:44%}
+.ch2.wall-broken .wallL{transform:translateX(-44px) rotate(-8deg)}.ch2.wall-broken .wallR{transform:translateX(44px) rotate(8deg)}.ch2.wall-broken .crack{opacity:0;transform:translateX(-50%) scaleY(.4)}.ch2.wall-broken .passageGlow{opacity:1}.ch2.wall-broken .dust{opacity:1}.ch2.wall-broken .shard{opacity:1}.ch2.wall-broken .s1{transform:translate(-56px,18px) rotate(-40deg)}.ch2.wall-broken .s2{transform:translate(-16px,34px) rotate(-12deg)}.ch2.wall-broken .s3{transform:translate(12px,36px) rotate(24deg)}.ch2.wall-broken .s4{transform:translate(58px,12px) rotate(46deg)}
+
+/* Chapter 3 scene details */
+.ch3 .moonGlow{left:50%;top:12%;transform:translateX(-50%);width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#eee3ff 0%,#bfb0ff 25%,#9272db55 48%,transparent 70%)}.ch3 .beam{left:50%;top:18%;transform:translateX(-50%);width:250px;height:290px;background:linear-gradient(180deg,#fff2be66,#d0beff17 72%,transparent);clip-path:polygon(46% 0,54% 0,85% 100%,15% 100%)}.ch3 .banner{top:0;width:74px;height:180px;background:linear-gradient(180deg,#7c60d4,#4e3f8e);clip-path:polygon(0 0,100% 0,100% 84%,50% 100%,0 84%);opacity:.9}.ch3 .bl{left:14%}.ch3 .br{right:14%}.ch3 .column{bottom:23%;width:42px;height:190px;background:linear-gradient(180deg,#d9d1f3,#b8abd9);border-radius:10px 10px 0 0;box-shadow:inset 0 0 0 2px #7d70aa}.ch3 .column:before,.ch3 .column:after{content:"";position:absolute;left:-4px;width:50px;height:11px;background:#8a79b3;border-radius:5px}.ch3 .column:before{top:-8px}.ch3 .column:after{bottom:-8px}.ch3 .c1{left:18%}.ch3 .c2{left:30%}.ch3 .c3{right:30%}.ch3 .c4{right:18%}
+.ch3 .sigil{top:95px;left:50%;transform:translateX(-50%);width:160px;height:160px;border-radius:50%;border:2px solid #cbb8ff33;box-shadow:0 0 26px #cdbdff22 inset}.ch3 .sigil:before,.ch3 .sigil:after{content:"";position:absolute;inset:18px;border-radius:50%;border:1px solid #f5e7ff24}.ch3 .sigil:after{inset:42px;border-style:dashed}
+.ch3 .lantern{bottom:28%;width:16px;height:70px;background:#654d78;border-radius:8px}.ch3 .lantern:before{content:"";position:absolute;left:-8px;top:-18px;width:32px;height:22px;background:#f3d98f;border-radius:8px;box-shadow:0 0 20px #f3d98f88}.ch3 .ln1{left:11%}.ch3 .ln2{right:11%}
+.ch3 .pedestal{left:50%;bottom:19%;transform:translateX(-50%);width:180px;height:86px;background:linear-gradient(180deg,#81729d,#5c5173);clip-path:polygon(12% 0,88% 0,100% 100%,0 100%)}.ch3 .chest{left:50%;bottom:34%;transform:translateX(-50%);width:130px;height:98px;z-index:2}.ch3 .chest .lid{left:6px;top:0;width:118px;height:40px;background:linear-gradient(180deg,#efc86d,#b98637);border:4px solid #8a611f;border-bottom:0;border-radius:58px 58px 14px 14px;box-shadow:0 0 25px #ffd98a44;transform-origin:50% 95%;transition:transform 1.1s cubic-bezier(.25,.8,.25,1)}.ch3 .chest .body{left:0;top:34px;width:130px;height:58px;background:linear-gradient(180deg,#d4b06a,#996d2e);border:4px solid #80561b;border-radius:0 0 15px 15px}.ch3 .chest .lock{left:55px;top:46px;width:20px;height:22px;background:#fff3b8;border:2px solid #8a611f;border-radius:4px;transition:opacity .3s ease}.ch3 .mist{left:50%;bottom:0;transform:translateX(-50%);width:100%;height:140px;background:radial-gradient(ellipse at 50% 70%,#ffffff18 0%,#cbc5ef0f 35%,transparent 72%)}.ch3 .treasureGlow{left:50%;bottom:38%;transform:translateX(-50%);width:180px;height:120px;background:radial-gradient(ellipse at center,#fff2be88 0%,#e6d39e3a 35%,transparent 72%);opacity:.25;transition:opacity .8s ease}.ch3 .burst{left:50%;bottom:37%;transform:translateX(-50%);width:220px;height:190px;opacity:0;transition:opacity .6s ease}.ch3 .burst .ray{left:50%;top:50%;width:4px;height:84px;background:linear-gradient(180deg,#fff9dd,#f0d68700);transform-origin:50% 100%}.ch3 .r1{transform:translate(-50%,-100%) rotate(0deg)}.ch3 .r2{transform:translate(-50%,-100%) rotate(30deg)}.ch3 .r3{transform:translate(-50%,-100%) rotate(60deg)}.ch3 .r4{transform:translate(-50%,-100%) rotate(90deg)}.ch3 .r5{transform:translate(-50%,-100%) rotate(120deg)}.ch3 .r6{transform:translate(-50%,-100%) rotate(150deg)}.ch3 .artifact{left:50%;bottom:43%;transform:translateX(-50%) translateY(26px) scale(.6);font-size:40px;opacity:0;transition:transform 1s ease, opacity .8s ease;z-index:3;filter:drop-shadow(0 0 18px #ffe6a8)}
+.ch3 .particle{width:8px;height:8px;border-radius:50%;background:#f8ecbf;box-shadow:0 0 12px #f8ecbf;opacity:0}.ch3 .pt1{left:46%;bottom:41%}.ch3 .pt2{left:51%;bottom:44%}.ch3 .pt3{left:56%;bottom:41%}.ch3 .pt4{left:43%;bottom:38%}.ch3 .pt5{left:58%;bottom:38%}.ch3 .particle{transition:transform 1.2s ease, opacity 1s ease}
+.ch3 .orb{width:8px;height:8px;border-radius:50%;background:#f6e8ff;box-shadow:0 0 14px #f6e8ff}.ch3 .o1{left:40%;top:24%}.ch3 .o2{left:57%;top:30%}.ch3 .o3{left:63%;top:20%}.ch3 .o4{left:28%;top:28%}
+.ch3.chest-open .chest .lid{transform:rotate(-50deg) translateY(-18px)}.ch3.chest-open .chest .lock{opacity:0}.ch3.chest-open .treasureGlow{opacity:1;animation:glowPulse 1.8s ease-in-out infinite}.ch3.chest-open .burst{opacity:1}.ch3.chest-open .artifact{opacity:1;transform:translateX(-50%) translateY(-28px) scale(1.08)}.ch3.chest-open .pt1{opacity:1;transform:translate(-24px,-66px) scale(1.2)}.ch3.chest-open .pt2{opacity:1;transform:translate(0,-84px) scale(1.1)}.ch3.chest-open .pt3{opacity:1;transform:translate(28px,-68px) scale(1.2)}.ch3.chest-open .pt4{opacity:1;transform:translate(-42px,-36px) scale(1)}.ch3.chest-open .pt5{opacity:1;transform:translate(42px,-38px) scale(1)}
+@keyframes glowPulse{0%,100%{transform:translateX(-50%) scale(.96)}50%{transform:translateX(-50%) scale(1.05)}}
+
+@media(max-width:760px){.chapters{grid-template-columns:repeat(3,1fr)}.bottom{grid-template-columns:1fr}.scene{min-height:420px}.startCard{padding:22px}.narrative{right:12px;left:12px}.spark{width:32px;height:32px}.ch1 .path{width:210px;height:190px}.ch1 .temple{transform:translateX(-50%) scale(.86)}.ch1 .bush{transform:scale(.85)}.ch2 .barrier{transform:translateX(-50%) scale(.84)}.ch2 .group{transform:scale(.88)}.ch3 .chest{transform:translateX(-50%) scale(.85)}}
+@media(max-width:430px){.scene{min-height:395px}.brand h1{font-size:28px}.narrative{padding:12px 12px 10px}.narrative .small{font-size:12px}.spark{width:30px;height:30px}.ch2 .group{transform:scale(.72)}.ch2 .label{font-size:10px;padding:4px 8px}.completionNotice{font-size:11px;padding:7px 13px}}
+
+/* V6 - stone-by-stone masonry and depth */
+.ch2 .barrier{width:min(38%,345px);min-width:208px;height:235px;bottom:13%;perspective:850px}
+.ch2 .wallL,.ch2 .wallR{width:50%;height:200px;bottom:0;background:linear-gradient(115deg,#bba78b 0%,#927b62 40%,#6c5848 100%);border:0;box-shadow:inset 0 7px 10px #e8d1aa44,inset 0 -12px 14px #271c1655,0 13px 22px #08090d70;filter:drop-shadow(0 4px 2px #28211b);overflow:visible}
+.ch2 .wallL{left:0;clip-path:polygon(0% 10%,7% 10%,7% 0%,24% 0%,24% 8%,41% 8%,41% 0%,59% 0%,59% 8%,76% 8%,76% 0%,94% 0%,94% 10%,100% 10%,100% 100%,0% 100%)}
+.ch2 .wallR{right:0;clip-path:polygon(0% 10%,7% 10%,7% 0%,24% 0%,24% 8%,41% 8%,41% 0%,59% 0%,59% 8%,76% 8%,76% 0%,94% 0%,94% 10%,100% 10%,100% 100%,0% 100%)}
+.ch2 .wallL:before,.ch2 .wallR:before{content:"";inset:0;background:linear-gradient(90deg,#201b1838,#ffffff16 14%,#0000000b 82%,#09080665),linear-gradient(180deg,#e4c5a348,transparent 30%,#241b164d);z-index:3;pointer-events:none}
+.ch2 .wallL:after,.ch2 .wallR:after{content:"";top:13px;left:0;right:0;height:12px;background:linear-gradient(#e7d3ad,#8a7157);box-shadow:0 3px 7px #33291d99;z-index:4}
+.ch2 .masonry{left:2px;right:2px;top:15px;bottom:0;display:flex;flex-direction:column;gap:3px;z-index:2;overflow:hidden;padding:8px 4px 3px;background:#544537}
+.ch2 .stoneRow{position:relative;width:112%;left:-5%;height:27px;display:flex;gap:3px;flex:none}
+.ch2 .stoneRow:nth-child(2n){left:-14%}.ch2 .stoneRow:nth-child(3n){left:0}
+.ch2 .brick{position:relative;flex:1;min-width:0;border-radius:2px 4px 3px 2px;background:radial-gradient(circle at 28% 28%,#ffffff20 0%,transparent 55%),repeating-linear-gradient(30deg,#ffffff09 0px,#0000 3px,#2b211413 6px,#0000 9px),linear-gradient(155deg,#c3b299 0%,#a38e72 30%,#76614e 80%,#574536 100%);border-top:1px solid #eee0c267;border-left:1px solid #dac6a044;border-right:2px solid #372c2455;border-bottom:3px solid #3b2b2188;box-shadow:inset -3px -3px 7px #2c211852,inset 1px 2px 2px #fff2cf37}
+.ch2 .stoneRow:nth-child(3n) .brick:nth-child(2){flex:1.35;background-color:#a68f6f}.ch2 .stoneRow:nth-child(4n) .brick:nth-child(1){flex:.7}
+.ch2 .barrier .crack{width:16px;height:170px;top:28px;z-index:5;background:#231b17;filter:drop-shadow(0 0 2px #231b17);opacity:.95}
+.ch2.wall-broken .barrier .crack{opacity:0;transform:translateX(-50%) scaleY(.25)}
+.ch2 .passageGlow{z-index:1;width:160px;height:200px;bottom:18%}
+.ch2.wall-broken .wallL{transform:translateX(-80px) rotateY(-11deg) rotate(-5deg)}.ch2.wall-broken .wallR{transform:translateX(80px) rotateY(11deg) rotate(5deg)}
+.ch2.wall-broken .dust{opacity:1;animation:dustCloud 1.6s ease-out both}
+@keyframes dustCloud{0%{opacity:0;transform:translateX(-50%) scale(.4)}35%{opacity:1}100%{opacity:.55;transform:translateX(-50%) scale(2)}}
+.ch2 .shard{z-index:6;width:26px;height:24px;background:linear-gradient(155deg,#d4bda0,#7c654e);box-shadow:2px 5px 8px #16130d40}
+.ch2.wall-broken .s1{transform:translate(-95px,30px) rotate(-45deg)}.ch2.wall-broken .s2{transform:translate(-43px,45px) rotate(-15deg)}.ch2.wall-broken .s3{transform:translate(52px,49px) rotate(35deg)}.ch2.wall-broken .s4{transform:translate(92px,30px) rotate(53deg)}
+.ch2 .group{z-index:2}.ch2 .gL .person:before{content:"";position:absolute;left:10px;top:3px;width:12px;height:8px;border-radius:45% 45% 10% 10%;background:#584b3b;z-index:2}.ch2 .gR .person:before{content:"";position:absolute;left:8px;top:1px;width:18px;height:10px;border-radius:60% 60% 25% 25%;background:#735544;z-index:2}
+.ch2 .gL .person .body{box-shadow:inset 4px 0 #e2cbac33}.ch2 .gR .person .body{box-shadow:inset -4px 0 #f0c47e22}
+/* V6 - readable cinematic captions during end-of-chapter animations */
+.completionNotice{max-width:min(85%,710px);width:max-content;min-width:min(58%,300px);bottom:14px;border-radius:13px;padding:12px 19px;line-height:1.55;white-space:normal;text-align:center;font-size:15px;font-weight:650;letter-spacing:.03em;background:linear-gradient(100deg,#122b40ec,#1e3347f0);box-shadow:0 10px 25px #0007;z-index:10}
+.completionNotice:after{content:"▍";color:#ffe6ac;animation:caretBlink .8s steps(1,end) infinite;margin-left:2px}
+@keyframes caretBlink{50%{opacity:0}}
+.scene.animating .narrative{opacity:.45;transition:opacity .6s}
+/* V6 - richer chest radiance and floating relic */
+.ch3.chest-open .artifact{animation:relicHover 1.8s ease-in-out infinite alternate}
+@keyframes relicHover{from{transform:translateX(-50%) translateY(-28px) scale(1.04)}to{transform:translateX(-50%) translateY(-44px) scale(1.14)}}
+.ch3 .particle{box-shadow:0 0 13px #fff3ca,0 0 22px #eac46f}
+.ch3.chest-open .burst{animation:burstGlint 2.1s ease-in-out infinite}
+@keyframes burstGlint{0%,100%{opacity:.7}50%{opacity:1}}
+@media(max-width:760px){.ch2 .barrier{width:230px;height:208px;min-width:0}.ch2 .wallL,.ch2 .wallR{height:180px}.ch2 .masonry .stoneRow{height:25px}.ch2.wall-broken .wallL{transform:translateX(-48px) rotate(-4deg)}.ch2.wall-broken .wallR{transform:translateX(48px) rotate(4deg)}.completionNotice{font-size:13px}}
+@media(max-width:430px){.ch2 .barrier{width:190px;height:187px}.ch2 .wallL,.ch2 .wallR{height:165px}.ch2 .masonry .stoneRow{height:23px}.ch2.wall-broken .wallL{transform:translateX(-36px) rotate(-4deg)}.ch2.wall-broken .wallR{transform:translateX(36px) rotate(4deg)}.completionNotice{font-size:12px;max-width:92%;min-width:180px;padding:9px 10px}}
+@media(prefers-reduced-motion:reduce){.ch3.chest-open .artifact,.ch3.chest-open .burst,.ch3.chest-open .treasureGlow{animation:none}.completionNotice:after{animation:none}}
+
+
+/* -------------------------------------------------------------
+   V7 / MOBILE FIRST ENHANCEMENTS
+   Keep full desktop illustrations but optimize gameplay at phone size.
+------------------------------------------------------------- */
+html{scroll-behavior:smooth}
+button{touch-action:manipulation}
+.mobileBrief,.bagFab,.bagBackdrop,.bagClose{display:none}
+#inventory{position:relative}
+@media (max-width:760px){
+  :root{font-size:16px}
+  html,body{max-width:100%;overflow-x:clip}
+  body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+  body.bagVisible{overflow:hidden}
+  .wrap{padding:12px 12px 20px;max-width:100%}
+  .top{display:block}
+  .brand small{font-size:10px;letter-spacing:.17em}
+  .brand h1{font-size:clamp(23px,6vw,29px);line-height:1.2;margin:2px 0 12px}
+  .topActions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0 0 10px}
+  .topActions .btn{width:100%;min-width:0;min-height:44px;padding:8px 3px;border-radius:10px;font-size:13px;box-shadow:none;white-space:nowrap}
+  .topActions .wideLabel{display:none}
+  #bagTop{background:#f0c979;color:#172539}
+  .sub{font-size:12px;line-height:1.5;margin:2px 0 9px;color:#adbfd1}
+  .chapters{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;margin:9px 0 12px}
+  .chapter{min-width:0;min-height:50px;padding:5px 1px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column}
+  .chapter div{font-size:11px;line-height:1.4;white-space:nowrap}
+  .chapter b{display:none}
+  .chapter small{font-size:10px;line-height:1.3;white-space:nowrap}
+  .mobileBrief{display:block;background:linear-gradient(115deg,#1c384e,#182a3e);border:1px solid #dec38365;border-radius:14px 14px 0 0;padding:12px 14px 10px;margin-bottom:-1px}
+  .mobileBriefTop{display:flex;align-items:center;gap:8px;justify-content:space-between}
+  .mobileBriefTop strong{font-size:16px;line-height:1.3}
+  .mobileBriefTop span{font-size:11px;color:#f3dea4;white-space:nowrap}
+  .mobileBrief p{font-size:13px;color:#d4e1ed;line-height:1.5;margin:6px 0}
+  .mobileStory summary{font-size:12px;color:#f5d69a;cursor:pointer;list-style:none;min-height:28px;display:flex;align-items:center;gap:6px;user-select:none}
+  .mobileStory summary:after{content:'⌄';margin-left:2px;font-size:17px}
+  .mobileStory[open] summary:after{content:'⌃'}
+  .mobileStory summary::-webkit-details-marker{display:none}
+  .mobileStory div{color:#cbd7e5;font-size:13px;line-height:1.65;border-top:1px solid #ffffff22;padding-top:8px;overflow-wrap:anywhere}
+  .mobileStory .small{display:block;margin-top:5px}
+  .sceneCard{border-radius:0 0 15px 15px;border-top:0}
+  .scene{height:clamp(390px,106vw,455px);min-height:0}
+  .scene .narrative{display:none}
+  .spark{width:54px;height:54px;border-radius:50%;z-index:9;filter:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .spark:before{inset:8px;filter:drop-shadow(0 0 11px #ffe6b2)}
+  .spark:after{font-size:24px;filter:drop-shadow(0 0 10px #ffe6b2)}
+  .spark:active{transform:scale(.88)}
+  .completionNotice{max-width:94%;width:94%;min-width:0;bottom:10px;padding:10px 11px;line-height:1.45;font-size:13px;letter-spacing:0;z-index:12;white-space:normal}
+  .sceneFoot{padding:11px 12px;gap:9px;display:grid;grid-template-columns:1fr 72px;align-items:center}
+  .sceneFoot strong{font-size:13px;line-height:1.35;overflow-wrap:anywhere}
+  .sceneFoot .bar{min-width:0;width:100%;height:8px}
+  .sceneFoot .btn{grid-column:1/-1;width:100%;min-height:48px;padding:10px 12px;margin-top:3px;font-size:14px;border-radius:10px;box-shadow:0 3px 0 #9d7840}
+  .bottom{display:block;margin-top:12px}
+  .bottom > .panel:first-child{padding:13px 15px;border-radius:13px}
+  .bottom > .panel:first-child h2{font-size:16px}
+  .bottom > .panel:first-child p{font-size:13px;line-height:1.55}
+  .bottom > .panel:first-child .chapterLead{display:none}
+  #inventory{display:block;position:fixed;z-index:26;left:0;right:0;bottom:0;top:auto;max-height:min(80dvh,740px);overflow-y:auto;overscroll-behavior:contain;border-radius:20px 20px 0 0;border:1px solid #d5b477b3;background:linear-gradient(180deg,#1d384f,#111d2c);padding:20px 16px calc(26px + env(safe-area-inset-bottom));box-shadow:0 -22px 55px #000a;transform:translateY(110%);visibility:hidden;transition:transform .25s ease, visibility .25s ease}
+  #inventory.open{transform:translateY(0);visibility:visible}
+  #inventory h2{font-size:20px;margin-right:42px}
+  #inventory > p{font-size:13px!important}
+  .invgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+  .slot{min-height:90px;padding:10px 3px;touch-action:manipulation;overflow-wrap:anywhere}
+  .slot span{font-size:31px}
+  .slot small{font-size:12px}
+  .bagClose{display:flex;align-items:center;justify-content:center;position:absolute;right:14px;top:14px;min-width:44px;min-height:44px;border:1px solid #ffffff4a;border-radius:50%;background:#142d42;color:#f6e9d3;font-size:21px}
+  .bagBackdrop{position:fixed;inset:0;z-index:25;background:#050d18af;display:none}
+  .bagBackdrop.show{display:block}
+  .bagFab{position:fixed;display:flex;align-items:center;justify-content:center;gap:8px;right:14px;bottom:calc(13px + env(safe-area-inset-bottom));z-index:19;min-height:50px;min-width:136px;padding:10px 15px;border-radius:999px;border:1px solid #ffe7b0;color:#182438;font-weight:800;font-size:15px;background:linear-gradient(110deg,#ffe2a0,#eac077);box-shadow:0 5px 22px #0009}
+  .bagFab b{font-size:12px;border-radius:999px;background:#1e3a50;color:#ffdfa3;padding:3px 8px}
+  .bagFab.yieldToNext{opacity:0;pointer-events:none;transform:translateY(calc(100% + 28px))}
+  .bagFab{transition:opacity .18s ease, transform .18s ease}
+  .modalWrap{z-index:31;align-items:flex-end;padding:0;background:#06101bdf}
+  .modal{border-radius:20px 20px 0 0;max-width:100%;width:100%;max-height:88dvh;overflow-y:auto;overscroll-behavior:contain;padding:22px 17px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -14px 45px #000a}
+  .modal h2{font-size:20px;line-height:1.35;overflow-wrap:anywhere;margin:9px 0}
+  .modal p{font-size:15px;line-height:1.6}
+  .choice{min-height:52px;font-size:15px;line-height:1.5;padding:12px 13px;margin:8px 0;border-radius:12px}
+  .modalBtns{display:grid;grid-template-columns:1fr;gap:8px;margin-top:16px}
+  .modalBtns .btn{width:100%;min-height:49px;padding:10px 12px;box-shadow:none}
+  .feedback{padding:12px;margin-top:12px;font-size:14px}
+  .overlay{align-items:center;padding:10px;overflow-y:auto}
+  .startCard{width:100%;max-height:calc(100dvh - 20px);overflow-y:auto;padding:22px 18px;border-radius:17px}
+  .startCard h1{font-size:clamp(26px,7vw,36px);margin:6px 0 9px}
+  .startCard p{font-size:15px;line-height:1.65;margin:9px 0}
+  .nameRow{display:grid;grid-template-columns:1fr;gap:12px;margin-top:15px}
+  .nameRow input{min-width:0;width:100%;font-size:16px;min-height:52px;padding:12px 13px}
+  .nameRow .btn{min-height:52px;width:100%;box-shadow:none}
+  .helpLine{font-size:12px;line-height:1.5}
+  .foot{font-size:11px;line-height:1.5;margin:16px 4px 20px}
+  /* Artwork: keep the symbolic features centred and avoid the edge cropping of 320px phones. */
+  .ch1 .temple{transform-origin:50% 100%}
+  .ch1 .cloud.c2{right:-5%}
+  .ch2 .group{bottom:24%}
+  .ch2 .gL{left:1%}
+  .ch2 .gR{right:1%}
+  .ch2 .barrier{z-index:3}
+  .ch3 .banner.bl{left:4%}
+  .ch3 .banner.br{right:4%}
+}
+@media(max-width:360px){
+  .wrap{padding-left:9px;padding-right:9px}
+  .sub{font-size:11px}
+  .chapter div{font-size:10px}
+  .mobileBrief{padding:10px 11px}
+  .scene{height:395px}
+  .sceneFoot{grid-template-columns:1fr 62px}
+  .spark{width:52px;height:52px}
+  .ch2 .group{transform:scale(.62)}
+  .ch2 .barrier{transform:translateX(-50%) scale(.83)}
+  .ch3 .column.c1{left:8%}
+  .ch3 .column.c4{right:8%}
+}
+/* The in-scene bag button replaces the floating FAB so it never blocks Next. */
+.bagFab{display:none!important}
+.sceneBagBtn{display:none}
+@media(max-width:760px){
+  .sceneFoot .sceneNext{grid-column:1;min-width:0;white-space:normal}
+  .sceneFoot .sceneBagBtn{grid-column:2;display:flex;align-items:center;justify-content:center;min-width:0;min-height:48px;padding:8px 2px;box-shadow:none;background:#2d5064;border-color:#d8c590;color:#ffe8ba;font-size:12px;white-space:nowrap}
+}
+@media(min-width:761px){.mobileBrief,.bagBackdrop,.bagFab,.bagClose,.sceneBagBtn{display:none!important}}
+@media(prefers-reduced-motion:reduce){
+  .spark:before,.spark:after{animation:none}
+  #inventory{transition:none}
+}
+
+</style>
+</head>
+<body>
+<div class="overlay show" id="startOverlay">
+  <div class="startCard">
+    <div class="tag">EPHESIANS QUEST</div>
+    <h1>開始你的探索之旅</h1>
+    <p>在這個小冒險裡，你會進入《以弗所書》第一至第三章的場景，尋找隱藏寶物，逐步明白神永恆的計劃、恩典中的合一，以及顯明的奧祕。</p>
+    <p>請先輸入你的名字，讓遊戲用你的名字帶你進入這段旅程。</p>
+    <div class="nameRow"><input id="nameInput" maxlength="24" placeholder="請輸入你的名字，例如 Edmund"><button class="btn" id="startBtn">開始冒險 →</button></div>
+    <div class="helpLine">提示：你之後仍可以在右上角更改名字。</div>
+  </div>
+</div>
+<main class="wrap">
+  <header class="top">
+    <div class="brand"><small>EPHESIANS QUEST</small><h1>以弗所書探索之旅</h1></div>
+    <div class="topActions"><button class="btn secondary" id="soundBtn" type="button" aria-pressed="true">🔊 音效開</button><button class="btn secondary" id="renameBtn">✏️ 改名</button><button class="btn secondary" id="restart">↺ 重玩</button><button class="btn secondary" id="bagTop">🎒 <span class="wideLabel">背包 </span><span id="countTop">0/9</span></button></div>
+  </header>
+  <p class="sub">踏入第一至三章，尋找光點、解答經文問題、收集九件寶物。第四至六章待續。</p>
+  <nav class="chapters" id="chapters" aria-label="章節選擇"></nav>
+  <section class="mobileBrief" id="mobileBrief" aria-label="本章任務">
+    <div class="mobileBriefTop"><strong id="mobileChapterLabel">第1章｜神永恆的計劃</strong><span id="mobileFound">0 / 3</span></div>
+    <p id="mobileTask">沿着通往聖殿的路尋找三個光點。</p>
+    <details class="mobileStory" id="mobileStory"><summary>📜 展開本章故事與提示</summary><div id="mobileStoryContent"></div></details>
+  </section>
+  <section class="sceneCard">
+    <div class="scene ch1" id="scene">
+      <div class="bgLayer" id="bgLayer"></div>
+      <div class="narrative" id="narrative"></div>
+      <div id="hotspots"></div>
+      <div class="completionNotice" id="completionNotice"></div>
+    </div>
+    <div id="sceneFoot" class="sceneFoot"></div>
+  </section>
+  <section class="bottom">
+    <div class="panel"><h2 id="chapterTitle">第一章｜神永恆的計劃</h2><p id="chapterDesc"></p><p class="scripture" id="chapterVerse"></p><p class="chapterLead" id="chapterPrompt"></p></div>
+    <aside class="panel" id="inventory"><button id="bagClose" class="bagClose" type="button" aria-label="關閉背包">✕</button><h2>🎒 探索背包 <span id="invCount">0/9</span></h2><p style="font-size:12px">點擊已收集的寶物，即可重溫經文要領。</p><div class="invgrid" id="invgrid"></div></aside>
+  </section>
+  
+</main>
+<div class="bagBackdrop" id="bagBackdrop" aria-hidden="true"></div>
+<button class="bagFab" id="bagFab" type="button" aria-label="打開探索背包">🎒 <span>背包</span> <b id="bagFabCount">0/9</b></button>
+<div class="modalWrap" id="modalWrap" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="tag" id="modalTag"></div><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modalBtns" id="modalBtns"></div></div></div>
+<script>
+// Fallback for Safari/embedded file viewers where local storage may be unavailable.
+const storage = {
+  getItem(k) { try { return window.localStorage.getItem(k); } catch (_) { return null; } },
+  setItem(k,v) { try { window.localStorage.setItem(k,v); } catch (_) {} }
+};
+const chapters=[
+{scene:'ch1',title:'神永恆的計劃',verse:'以弗所書 1章',summary:'神在基督裏揀選、救贖我們，以聖靈作印記，並定意使萬有在基督裏同歸於一。',prompt:'你正走在通往聖殿的路上。每找到一件寶物，你都會更靠近神殿。留心道路兩旁與聖殿附近發光的位置，找出與揀選、救贖、印記有關的隱藏寶物。',positions:[['22%','72%'],['50%','56%'],['72%','48%']],items:[
+{id:'crown',name:'揀選之冠',emoji:'👑',verse:'1:3–6',meaning:'神在基督裏揀選信徒，使我們在祂面前成為聖潔，並藉耶穌基督得兒子的名分。',q:'第一章提到神在基督裏賜給信徒甚麼？',choices:['保證今生不遇困難','在基督裏蒙揀選並得兒子的名分','人人在世上成為君王'],answer:1},
+{id:'gem',name:'救贖寶石',emoji:'💎',verse:'1:7–10',meaning:'我們藉着基督的血得蒙救贖，過犯得以赦免；神的旨意是使萬有在基督裏同歸於一。',q:'根據第一章，信徒藉着甚麼得蒙救贖？',choices:['靠自己的好行為','靠社會地位','藉着基督的血與神豐富的恩典'],answer:2},
+{id:'seal',name:'應許印記',emoji:'📜',verse:'1:13–14',meaning:'信徒聽見真理的道並相信基督後，受了所應許的聖靈作印記。',q:'保羅說信徒受了甚麼作印記？',choices:['所應許的聖靈','一張地上的證書','可見的王冠'],answer:0}]},
+{scene:'ch2',title:'恩典與合一',verse:'以弗所書 2章',summary:'我們原本死在罪中，卻因神的恩典得救；基督拆毀隔閡，使猶太信徒和外邦信徒在祂裏面成為一體。',prompt:'你正站在猶太人與外邦人之間。留意兩邊群體及中間石牆附近發光的位置，找出與恩典、和平、歸家有關的寶物。完成後，你會看見牆被打開。',positions:[['16%','58%'],['50%','50%'],['81%','58%']],items:[
+{id:'gift',name:'恩典禮物',emoji:'🎁',verse:'2:8–10',meaning:'你們得救是本乎恩，也因着信；這不是出於自己，乃是神所賜的。',q:'第二章強調我們是怎樣得救的？',choices:['靠行為賺取','本乎恩，也因着信','靠血統與傳統'],answer:1},
+{id:'peace',name:'和平之橋',emoji:'🕊️',verse:'2:14–18',meaning:'基督自己就是我們的和平，拆毀中間隔斷的牆，使兩下藉十字架歸為一體。',q:'是誰拆毀了中間隔斷的牆？',choices:['宗教制度','基督自己','人的努力'],answer:1},
+{id:'house',name:'神家之屋',emoji:'🏠',verse:'2:19–22',meaning:'信徒不再作外人和客旅，而是與聖徒同國，是神家裏的人，並一同被建造。',q:'第二章最後，信徒被形容為甚麼？',choices:['神家裏的人','只是宗教訪客','仍然是外人'],answer:0}]},
+{scene:'ch3',title:'顯明的奧祕',verse:'以弗所書 3:1–13',summary:'外邦人藉福音在基督裏同為後嗣、同為一體、同蒙應許；神藉教會彰顯智慧，保羅即使受苦仍勸勉信徒不要灰心。',prompt:'你已進入奧祕聖所。當你發現閃爍的位置，便可揭開關乎奧祕、智慧與盼望的寶物。收齊之後，寶箱將會打開，光輝會從當中湧出。',positions:[['26%','57%'],['50%','33%'],['73%','57%']],items:[
+{id:'key',name:'奧祕之匙',emoji:'🗝️',verse:'3:3–6',meaning:'神將奧祕啟示給保羅：外邦人在基督耶穌裏，藉着福音同為後嗣、同為一體、同蒙應許。',q:'第三章顯明的奧祕是甚麼？',choices:['外邦人與猶太信徒在基督裏同蒙應許','只有使徒才能得救','保羅永遠不受苦'],answer:0},
+{id:'light',name:'智慧之光',emoji:'✨',verse:'3:10–11',meaning:'神要藉着教會使天上執政掌權者，現在得知祂百般的智慧。',q:'神要藉着甚麼彰顯祂的智慧？',choices:['單靠神蹟','教會','地上的君王'],answer:1},
+{id:'shield',name:'盼望之盾',emoji:'🛡️',verse:'3:12–13',meaning:'我們藉着基督，因信祂，就篤信不疑地來到神面前；因此不要因保羅的患難而灰心。',q:'保羅希望以弗所信徒對他的患難有甚麼反應？',choices:['立刻放棄信仰','不要灰心','覺得福音失敗'],answer:1}]}
+];
+const total=chapters.flatMap(c=>c.items);
+const KEY='ephesians_quest_v7_progress';
+const NAME_KEY='ephesians_quest_v7_name';
+let saved=[];try{saved=JSON.parse(storage.getItem(KEY)||storage.getItem('ephesians_quest_v6_progress')||'[]')}catch(e){}
+let collected=new Set(Array.isArray(saved)?saved.filter(x=>total.some(y=>y.id===x)):[]);
+let lastMobileChapter=-1; let current=0; let playerName=storage.getItem(NAME_KEY)||storage.getItem('ephesians_quest_v6_name')||''; let chapterSeen=new Set(); let animationLock=false; let lastScene='';
+const $=id=>document.getElementById(id);
+const SOUND_KEY='ephesians_quest_v7_sound';
+let soundOn=(storage.getItem(SOUND_KEY)||storage.getItem('ephesians_quest_v6_sound'))!=='off';
+let audioCtx=null;
+function getAudio(){
+  if(!soundOn)return null;
+  try{
+    const C=window.AudioContext||window.webkitAudioContext;
+    if(!C)return null;
+    if(!audioCtx)audioCtx=new C();
+    if(audioCtx.state==='suspended') audioCtx.resume().catch(()=>{});
+    return audioCtx;
+  }catch(_){return null;}
+}
+function playTone(frequency,start,duration,volume=.055,type='sine',slideTo=null){
+  const ctx=getAudio();if(!ctx)return;
+  const now=ctx.currentTime+start;
+  const os=ctx.createOscillator(),gain=ctx.createGain();
+  os.type=type;os.frequency.setValueAtTime(Math.max(30,frequency),now);
+  if(slideTo)os.frequency.exponentialRampToValueAtTime(Math.max(30,slideTo),now+duration);
+  gain.gain.setValueAtTime(.0001,now);
+  gain.gain.exponentialRampToValueAtTime(volume,now+.025);
+  gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
+  os.connect(gain).connect(ctx.destination);os.start(now);os.stop(now+duration+.04);
+}
+function playNoise(delay,duration,volume=.08){
+  const ctx=getAudio();if(!ctx)return;
+  const sampleCount=Math.floor(ctx.sampleRate*duration),buffer=ctx.createBuffer(1,sampleCount,ctx.sampleRate);
+  const data=buffer.getChannelData(0);
+  for(let i=0;i<sampleCount;i++)data[i]=(Math.random()*2-1)*Math.pow(1-i/sampleCount,1.25);
+  const src=ctx.createBufferSource();src.buffer=buffer;
+  const filter=ctx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=950;
+  const gain=ctx.createGain();gain.gain.setValueAtTime(volume,ctx.currentTime+delay);
+  gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+delay+duration);
+  src.connect(filter).connect(gain).connect(ctx.destination);src.start(ctx.currentTime+delay);src.stop(ctx.currentTime+delay+duration+.01);
+}
+function playSound(kind){
+  if(!soundOn)return;
+  if(kind==='spot'){playTone(720,0,.15,.035,'sine',1000);playTone(1090,.11,.22,.025)}
+  else if(kind==='correct'){playTone(670,0,.16,.035);playTone(910,.12,.2,.035)}
+  else if(kind==='collect'){[523,659,784,1047].forEach((f,i)=>playTone(f,i*.085,.32,.045,'sine'))}
+  else if(kind==='approach'){playTone(392,0,.23,.03);playTone(523,.16,.33,.035)}
+  else if(kind==='wall'){playNoise(0,1.15,.21);playTone(115,0,.9,.12,'sawtooth',58);playNoise(.34,.74,.12);playTone(75,.45,.5,.07,'triangle',55)}
+  else if(kind==='chest'){[392,523,659,784,1047,1318].forEach((f,i)=>playTone(f,i*.14,1.05,.05,'sine'));playTone(1568,.9,1.7,.04)}
+}
+function updateSoundButton(){
+  const b=$('soundBtn');
+  b.innerHTML=soundOn?'🔊 <span class="wideLabel">音效開</span>':'🔇 <span class="wideLabel">音效關</span>'; 
+  b.setAttribute('aria-pressed',String(soundOn));
+  b.setAttribute('aria-label',soundOn?'關閉遊戲音效':'開啟遊戲音效');
+}
+
+function persist(){storage.setItem(KEY,JSON.stringify([...collected]));storage.setItem(NAME_KEY,playerName)}
+function unlocked(i){return i===0 || chapters.slice(0,i).every(c=>c.items.every(it=>collected.has(it.id)))}
+function completed(i){return chapters[i].items.every(it=>collected.has(it.id))}
+function chapterCount(i){return chapters[i].items.filter(it=>collected.has(it.id)).length}
+function heroName(){ return playerName || '探索者'; }
+function button(label,onclick,secondary=false){let b=document.createElement('button');b.className='btn'+(secondary?' secondary':'');b.textContent=label;b.onclick=onclick;return b}
+function close(){ $('modalWrap').classList.remove('show'); $('modalBody').innerHTML=''; $('modalBtns').innerHTML=''; $('modalTag').textContent=''; }
+function modal(tag,title){ $('modalWrap').classList.add('show'); $('modalTag').textContent=tag; $('modalTitle').textContent=title; $('modalBody').innerHTML=''; $('modalBtns').innerHTML=''; }
+function showInfo(title,text){ modal('系統訊息',title); let p=document.createElement('p'); p.textContent=text; $('modalBody').append(p); $('modalBtns').append(button('知道了',close,true)); }
+function chapterNarrative(i){ const n=safeHtml(heroName()); return [
+`<b>${n}</b>，你現在正走在一條通往聖殿的路上。這一章會帶你看見：神在基督裡早已為祂的子民預備了永恆的計劃。<span class="small">留意道路旁邊與聖殿附近微微發光的位置；當你找出隱藏寶物時，你會一步一步明白揀選、救贖與聖靈的印記。</span>`,
+`<b>${n}</b>，你現在站在兩群人之間：一邊是猶太人，一邊是外邦人；中間隔著一堵牆。這一章要你看見：原本與神隔絕的人，如何因恩典得救，並在基督裡與別人和好。<span class="small">仔細尋找兩邊人群與石牆附近的發光位置，你將發現恩典、和平與歸家的記號。</span>`,
+`<b>${n}</b>，你已進入奧祕聖所。這一章會揭開神曾經隱藏、如今在基督裡顯明的奧祕。<span class="small">當你找到發光的位置，你會明白神如何藉教會彰顯祂的智慧，並且學習不要灰心。收齊寶物後，寶箱會為你打開。</span>`
+][i]; }
+function masonryMarkup(){
+  return Array.from({length:7},(_,row)=>
+    `<div class="stoneRow">${Array.from({length:3},(_,col)=>`<i class="brick" aria-hidden="true"></i>`).join('')}</div>`
+  ).join('');
+}
+function safeHtml(value){return String(value).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function sceneMarkup(name){
+  if(name==='ch1') return `<div class="sunhalo"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="mount m1"></div><div class="mount m2"></div><div class="mount m3"></div><div class="mount m4"></div><div class="temple"><div class="roof"></div><div class="lintel"></div><div class="base"></div><div class="col cA"></div><div class="col cB"></div><div class="col cC"></div><div class="col cD"></div></div><div class="path"></div><div class="stone st1"></div><div class="stone st2"></div><div class="stone st3"></div><div class="stone st4"></div><div class="bush b1"></div><div class="bush b2"></div><div class="bush b3"></div><div class="bush b4"></div><div class="lamp l1"></div><div class="lamp l2"></div>`;
+  if(name==='ch2') return `<div class="sunset"></div><div class="groundPath"></div><div class="rubble ru1"></div><div class="rubble ru2"></div><div class="rubble ru3"></div><div class="rubble ru4"></div><div class="group gL"><div class="label">猶太人</div><div class="labelSub">神子民的群體</div><div class="person robeBlue pA"><div class="head"></div><div class="cape"></div><div class="body"></div><div class="arms"></div><div class="legs"></div><div class="jewishArch"></div></div><div class="person robeTan pB"><div class="head"></div><div class="cape"></div><div class="body"></div><div class="arms"></div><div class="legs"></div><div class="jewishArch"></div></div><div class="person robeGreen pC"><div class="head"></div><div class="cape"></div><div class="body"></div><div class="arms"></div><div class="legs"></div><div class="jewishArch"></div></div></div><div class="group gR"><div class="label">外邦人</div><div class="labelSub">原本遠離的人</div><div class="person robeRed pA"><div class="head"></div><div class="cape"></div><div class="body"></div><div class="arms"></div><div class="legs"></div><div class="gentileTrim"></div></div><div class="person robeGreen pB"><div class="head"></div><div class="cape"></div><div class="body"></div><div class="arms"></div><div class="legs"></div><div class="gentileTrim"></div></div><div class="person robeBlue pC"><div class="head"></div><div class="cape"></div><div class="body"></div><div class="arms"></div><div class="legs"></div><div class="gentileTrim"></div></div></div><div class="passageGlow"></div><div class="barrier"><div class="wallL"><div class="masonry">${masonryMarkup()}</div></div><div class="wallR"><div class="masonry">${masonryMarkup()}</div></div><div class="crack"></div><div class="dust"></div><div class="shard s1"></div><div class="shard s2"></div><div class="shard s3"></div><div class="shard s4"></div></div>`;
+  return `<div class="moonGlow"></div><div class="beam"></div><div class="banner bl"></div><div class="banner br"></div><div class="column c1"></div><div class="column c2"></div><div class="column c3"></div><div class="column c4"></div><div class="sigil"></div><div class="lantern ln1"></div><div class="lantern ln2"></div><div class="pedestal"></div><div class="treasureGlow"></div><div class="burst"><div class="ray r1"></div><div class="ray r2"></div><div class="ray r3"></div><div class="ray r4"></div><div class="ray r5"></div><div class="ray r6"></div></div><div class="artifact">👑</div><div class="particle pt1"></div><div class="particle pt2"></div><div class="particle pt3"></div><div class="particle pt4"></div><div class="particle pt5"></div><div class="chest"><div class="lid"></div><div class="body"></div><div class="lock"></div></div><div class="mist"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="orb o4"></div>`;
+}
+function maybeShowChapterIntro(){ if(chapterSeen.has(current)) return; chapterSeen.add(current); modal(`第${current+1}章開始`, chapters[current].title); let p=document.createElement('p'); p.innerHTML=chapterNarrative(current); $('modalBody').append(p); let p2=document.createElement('p'); p2.textContent='請在場景中留意發光的位置；你不會直接看見寶物的名字，要靠你發現它們，才能回答問題並收藏。'; $('modalBody').append(p2); $('modalBtns').append(button('開始探索',close)); }
+function render(options={}){
+  if(current>2) current=0;
+  let c=chapters[current];
+  if(lastMobileChapter!==current){$('mobileStory').open=false;lastMobileChapter=current;}
+  $('chapters').innerHTML='';
+  for(let i=0;i<6;i++){
+    let b=document.createElement('button');
+    b.className='chapter'+(i===current?' active':'')+(!unlocked(i)||i>2?' locked':'');
+    b.disabled=animationLock;
+    b.innerHTML=`<div>${i>2?'🔒':completed(i)?'✅':'📖'} 第${i+1}章</div><b>${i>2?'敬請期待':chapters[i].title}</b><small>${i>2?'待續':completed(i)?'完成':unlocked(i)?'探索中':'鎖定'}</small>`;
+    b.onclick=()=>{ if(i>2) showInfo('To be continued','第四至第六章將在下一次冒險開放。第四章開始轉向信徒如何活出與蒙召相稱的生命。'); else if(!unlocked(i)) showInfo('關卡尚未解鎖','先完成前一章的三件寶物任務，才能前往下一章。'); else { current=i; render(); maybeShowChapterIntro(); } };
+    $('chapters').appendChild(b);
+  }
+  let sceneCls='scene '+c.scene;
+  if(current===0) sceneCls += ' ch1-stage-' + (options.holdCompleted?Math.min(2,chapterCount(0)):chapterCount(0));
+  if(current===1 && completed(current) && !options.holdCompleted) sceneCls+=' wall-broken';
+  if(current===2 && completed(current) && !options.holdCompleted) sceneCls+=' chest-open';
+  if(animationLock) sceneCls += ' animating';
+  $('scene').className=sceneCls;
+  if(lastScene!==c.scene){$('bgLayer').innerHTML=sceneMarkup(c.scene);lastScene=c.scene;}
+  $('narrative').innerHTML=chapterNarrative(current);
+  // Outside the artwork on phones, so story text never covers hidden clues.
+  $('mobileChapterLabel').textContent=`第${current+1}章｜${c.title}`;
+  $('mobileFound').textContent=`${chapterCount(current)} / 3 已收集`;
+  const mobileHints=[
+    '沿路探索聖殿，尋找揀選、救贖與應許的微光。',
+    '看看兩邊人群與石牆，尋找恩典、和平與歸家的記號。',
+    '探索神祕聖所，收齊三件寶物，揭開奧祕寶箱。'
+  ];
+  $('mobileTask').textContent=mobileHints[current];
+  $('mobileStoryContent').innerHTML=chapterNarrative(current);
+  $('completionNotice').textContent=current===0?'你正愈來愈接近神殿…':current===1?'石牆正在崩裂，通道正在打開…':'寶箱正在打開，奧祕正被顯明…';
+  let spots=$('hotspots'); spots.innerHTML='';
+  c.items.forEach((it,i)=>{ let got=collected.has(it.id); let b=document.createElement('button'); b.className='spark'+(got?' collected':''); b.style.left=c.positions[i][0]; b.style.top=c.positions[i][1]; b.disabled=animationLock; b.setAttribute('aria-label',got?it.name+' 已收集':'隱藏寶物位置'); b.onclick=()=>{playSound('spot');quiz(it,b);}; spots.appendChild(b); });
+  let n=c.items.filter(i=>collected.has(i.id)).length;
+  $('sceneFoot').innerHTML=`<strong><span class="playerTag">${safeHtml(heroName())}</span> · Chapter ${current+1} · ${n}/3 已找到</strong><div class="bar"><div style="width:${100*n/3}%"></div></div>`;
+  let next=button(completed(current)?(current===2?'完成冒險 ✨':'前往下一章 →'):'收集全部 3 件寶物後解鎖',()=>{ if(current===2) finish(); else { current++; render(); maybeShowChapterIntro(); } });
+  next.disabled=!completed(current) || animationLock; next.classList.add('sceneNext'); $('sceneFoot').appendChild(next); const sb=button('🎒 背包',openBag,true);sb.classList.add('sceneBagBtn');sb.id='sceneBag';sb.disabled=animationLock;sb.setAttribute('aria-label','打開探索背包');$('sceneFoot').appendChild(sb);
+  $('chapterTitle').textContent=`第${current+1}章｜${c.title}`; $('chapterDesc').textContent=c.summary; $('chapterVerse').textContent=c.verse; $('chapterPrompt').textContent=c.prompt; renderBag();
+}
+function renderBag(){ $('invCount').textContent=`${collected.size}/9`; $('bagFabCount').textContent=`${collected.size}/9`; $('countTop').textContent=`${collected.size}/9`; let grid=$('invgrid'); grid.innerHTML=''; total.forEach(it=>{ let ok=collected.has(it.id); let b=document.createElement('button'); b.className='slot'+(ok?'':' empty'); b.disabled=animationLock; b.innerHTML=`<span>${ok?it.emoji:'🔒'}</span><small>${ok?it.name:'未解鎖'}</small>`; b.onclick=()=>ok?viewItem(it):showInfo('尚未解鎖','你還未發現這件寶物。請回到相關章節，在發光的位置尋找它。'); grid.appendChild(b); }) }
+function viewItem(it){ modal('已收藏寶物',it.emoji+' '+it.name); let p=document.createElement('p'); p.textContent=it.meaning; $('modalBody').append(p); let v=document.createElement('p'); v.className='scripture'; v.textContent='相關章節：以弗所書 '+it.verse; $('modalBody').append(v); $('modalBtns').append(button('關閉',close,true)); }
+function animateToBag(fromEl, emoji, done){ const start=fromEl.getBoundingClientRect(); const end=(window.matchMedia('(max-width:760px)').matches?$('sceneBag'):$('bagTop')).getBoundingClientRect(); const fly=document.createElement('div'); fly.className='floatLoot'; fly.textContent=emoji; fly.style.left=(start.left+start.width/2-17)+'px'; fly.style.top=(start.top+start.height/2-17)+'px'; document.body.appendChild(fly); requestAnimationFrame(()=>{ fly.style.left=(end.left+end.width/2-17)+'px'; fly.style.top=(end.top+end.height/2-17)+'px'; fly.style.transform='scale(.55) rotate(18deg)'; fly.style.opacity='.2'; }); setTimeout(()=>{ fly.remove(); done&&done(); },840); }
+const transitionSentences=[
+  '神在基督裏賜下救贖與應許，祂永恆的計劃正逐步展開。',
+  '基督拆毀隔斷的牆，使原本遠離的人同屬神的家。',
+  '曾經隱藏的奧祕如今顯明：教會彰顯神的智慧，所以不要灰心。'
+];
+function playCompletionSequence(chIndex,callback){
+  if(animationLock)return;
+  animationLock=true;
+  render({holdCompleted:true});
+  const scene=$('scene');
+  const caption=$('completionNotice');
+  caption.textContent='';
+  // Paint the intact wall/closed chest before starting transitions.
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    if(chIndex===0){scene.classList.remove('ch1-stage-2');scene.classList.add('ch1-stage-3');playSound('approach');}
+    else if(chIndex===1){scene.classList.add('wall-broken');playSound('wall');}
+    else {scene.classList.add('chest-open');playSound('chest');}
+  }));
+  const message=transitionSentences[chIndex];
+  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const interval=reduced?8:50;
+  let at=0;
+  setTimeout(()=>{
+    const ticker=setInterval(()=>{
+      at++;
+      caption.textContent=message.slice(0,at);
+      if(at>=message.length){
+        clearInterval(ticker);
+        setTimeout(()=>{animationLock=false;render();callback();},reduced?450:1400);
+      }
+    },interval);
+  },reduced?80:500);
+}
+function quiz(it, triggerEl){ modal('📖 隱藏寶物', `${heroName()}，你發現了一件隱藏寶物`); let p=document.createElement('p'); p.textContent='若你能回答問題，就能知道這寶物是甚麼，並把它收進背包。'; $('modalBody').append(p); let q=document.createElement('p'); q.textContent=it.q; $('modalBody').append(q); let choices=document.createElement('div'); $('modalBody').append(choices); let feedback=document.createElement('div'); $('modalBody').append(feedback); it.choices.forEach((x,i)=>{ let b=document.createElement('button'); b.className='choice'; b.textContent=String.fromCharCode(65+i)+'. '+x; b.onclick=()=>{ if(i!==it.answer){ feedback.className='feedback'; feedback.textContent='再試一次！想一想這一章的核心思想。'; return } playSound('correct'); b.classList.add('correct'); choices.querySelectorAll('button').forEach(v=>v.disabled=true); feedback.className='feedback'; feedback.innerHTML=`<b>✓ 你找到了：${it.emoji} ${it.name}</b>`; let detail=document.createElement('p'); detail.textContent=it.meaning; feedback.append(detail); $('modalBtns').innerHTML=''; $('modalBtns').append(button('收進背包',()=>{ playSound('collect');animateToBag(triggerEl,it.emoji,()=>{ collected.add(it.id); persist(); close(); const completedNow=completed(current); render(); if(completedNow){ playCompletionSequence(current, ()=>chapterClear()); } }); })); }; choices.appendChild(b); }); $('modalBtns').append(button('稍後再試',close,true)); }
+function chapterClear(){ let c=chapters[current]; modal('CHAPTER COMPLETED', `${heroName()}，你完成了第${current+1}章！`); let p=document.createElement('p'); p.textContent=c.summary; $('modalBody').appendChild(p); let a=document.createElement('p'); a.textContent=[`${heroName()}，你已更接近神的居所；下一步你會由神永恆的計劃，走進恩典與合一的旅程。`,`${heroName()}，你已看見隔斷的牆被打開；接下來你要進入奧祕聖所，看看神如何藉教會彰顯祂的智慧。`,`${heroName()}，你已完成第一至第三章；第四至第六章將會在下一次冒險中繼續。`][current]; $('modalBody').append(a); if(current<2) $('modalBtns').append(button('前往下一章 →',()=>{ current++; close(); render(); maybeShowChapterIntro(); })); else $('modalBtns').append(button('查看冒險結局 ✨',()=>{ close(); finish(); })); }
+function finish(){ modal('QUEST COMPLETE', `${heroName()}，你已完成第一至第三章的冒險！`); let p=document.createElement('p'); p.textContent='你已收集九件寶物，走過神永恆的計劃、恩典中的合一，以及顯明的奧祕。第四至第六章將繼續帶你探索：如何活出與蒙召相稱的生命。'; $('modalBody').append(p); $('modalBtns').append(button('重新由第一章查看',()=>{ current=0; close(); render(); maybeShowChapterIntro(); }),button('關閉',close,true)); }
+function openNameOverlay(){ $('nameInput').value=playerName; $('startOverlay').classList.add('show'); setTimeout(()=>$('nameInput').focus(),20); }
+function startWithName(){ const v=$('nameInput').value.trim(); if(!v){ $('nameInput').focus(); return; } playerName=v; persist(); $('startOverlay').classList.remove('show'); render(); maybeShowChapterIntro(); }
+$('startBtn').onclick=startWithName; $('nameInput').addEventListener('keydown',e=>{ if(e.key==='Enter') startWithName(); }); $('soundBtn').onclick=()=>{soundOn=!soundOn;storage.setItem(SOUND_KEY,soundOn?'on':'off');updateSoundButton();if(soundOn)playSound('spot');}; updateSoundButton();
+$('renameBtn').onclick=openNameOverlay;
+function openBag(){
+  if(animationLock)return;
+  if(window.matchMedia('(max-width:760px)').matches){
+    $('inventory').classList.add('open'); $('bagBackdrop').classList.add('show');
+    document.body.classList.add('bagVisible');
+    $('bagClose').focus();
+  } else $('inventory').scrollIntoView({behavior:'smooth'});
+}
+function closeBag(){
+  $('inventory').classList.remove('open'); $('bagBackdrop').classList.remove('show');
+  document.body.classList.remove('bagVisible');
+}
+$('bagTop').onclick=openBag; $('bagFab').onclick=openBag;
+$('bagClose').onclick=closeBag; $('bagBackdrop').onclick=closeBag;
+window.addEventListener('resize',()=>{if(!window.matchMedia('(max-width:760px)').matches)closeBag();});
+// The floating bag button yields while the large Next button is on screen.
+if('IntersectionObserver' in window){
+  const fabObserver=new IntersectionObserver(entries=>{
+    $('bagFab').classList.toggle('yieldToNext',entries[0].isIntersecting);
+  },{threshold:0.05});
+  fabObserver.observe($('sceneFoot'));
+}
+$('restart').onclick=()=>{ if(animationLock)return; modal('重新開始','確定清除遊戲進度？'); let p=document.createElement('p'); p.textContent='將移除這個瀏覽器目前收集的寶物，但會保留你的名字。'; $('modalBody').append(p); $('modalBtns').append(button('取消',close,true),button('確定重設',()=>{ collected.clear(); current=0; chapterSeen.clear(); persist(); close(); render(); maybeShowChapterIntro(); })) };
+$('modalWrap').onclick=e=>{ if(e.target===$('modalWrap')) close(); }; document.addEventListener('keydown',e=>{ if(e.key==='Escape'){if($('modalWrap').classList.contains('show'))close();else closeBag();} });
+if(playerName){ $('startOverlay').classList.remove('show'); render(); } else { openNameOverlay(); }
+</script>
+</body>
+</html>
